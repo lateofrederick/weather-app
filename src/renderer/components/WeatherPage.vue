@@ -105,11 +105,9 @@
 
 <script>
   import SystemInformation from './SystemInformation'
-  // import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
 
-
-
-  export default {
+export default {
     name: 'weather-page',
     components: { SystemInformation },
     data () {
@@ -117,7 +115,7 @@
         date: null,
         hoverToday: false,
         hoverWeek: false,
-        hoverMonth: false,
+        hoverMonth: false
       }
     },
     methods: {
@@ -137,11 +135,12 @@
     mounted () {
       this.systemDate()
       this.weather()
+      this.$store.dispatch('loadWeatherInfo')
     },
     computed: {
-      weatherInfo () { 
-        
-      }
+      ...mapState([
+        'weatherCondition'
+      ])
     }
   }
 </script>
